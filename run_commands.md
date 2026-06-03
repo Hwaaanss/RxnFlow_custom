@@ -51,6 +51,8 @@ cd ..
 ```bash
 echo "=== 6VQN HETATM ===" && grep "^HETATM" targets/6vqn.pdb | awk '{print $4}' | sort -u
 echo "=== 1VJY HETATM ===" && grep "^HETATM" targets/1vjy.pdb | awk '{print $4}' | sort -u
+echo "=== 6TVG HETATM ===" && grep "^HETATM" targets/6tvg.pdb | awk '{print $4}' | sort -u
+echo "=== 6DHB HETATM ===" && grep "^HETATM" targets/6dhb.pdb | awk '{print $4}' | sort -u
 ```
 
 위 코드의 결과 중 물(HOH)을 제외한 3글자 출력 약물 리간드를 확보 후 아래 코드의 <LIG_*> 부분에 각각 교체
@@ -58,6 +60,8 @@ echo "=== 1VJY HETATM ===" && grep "^HETATM" targets/1vjy.pdb | awk '{print $4}'
 ```bash
 grep -E "^HETATM.* <LIG_6VQN> " targets/6vqn.pdb > targets/ligand_6vqn.pdb
 grep -E "^HETATM.* <LIG_1VJY> " targets/1vjy.pdb > targets/ligand_1vjy.pdb
+grep -E "^HETATM.* <LIG_6TVG> " targets/6tvg.pdb > targets/ligand_6tvg.pdb
+grep -E "^HETATM.* <LIG_6DHB> " targets/6dhb.pdb > targets/ligand_6dhb.pdb
 ```
 
 
@@ -76,17 +80,40 @@ python scripts/opt_unidock_moo.py \
 ## check output's column name and directory
 ```bash
 ls ./logs/pdl1_6vqn/
-head -3 ./logs/pdl1_6vqn/*.csv
 ```
 
 ## TGF-BR1 re-docking, dual-target integration and sort
 ```bash
-python redock_and_merge.py \
-  --gen_csv ./logs/pdl1_6vqn/<생성결과>.csv \
-  --protein ./targets/1vjy.pdb \
-  --ref_ligand ./targets/ligand_1vjy.pdb \
-  --out ./logs/dual_target_hits.csv \
-  --topk 1000
+python dual_target_screen.py \
+  --docking_dir ./logs/pdl1_6vqn/docking \
+  --target1_name PD-L1 --target2_name TGF-bR1 \
+  --target2_protein ./targets/1vjy.pdb \
+  --target2_ref_ligand ./targets/ligand_1vjy.pdb \
+  --out ./logs/dual_target_hits_pdl1_tgfbr1.csv \
+  --pre_topk 0 --diverse --final_topk 1000 \
+  --num_workers 6 --verbose --batch 1000
   ```
   
-  위 코드의 <생성결과> 부분 파일명에 맞게 수정 필요
+## 6TVG re-docking, dual-target integration and sort
+```bash
+python dual_target_screen.py \
+  --docking_dir ./logs/pdl1_6vqn/docking \
+  --target1_name PD-L1 --target2_name 6TVG \
+  --target2_protein ./targets/6tvg.pdb \
+  --target2_ref_ligand ./targets/ligand_6tvg.pdb \
+  --out ./logs/dual_target_hits_pdl1_6tvg.csv \
+  --pre_topk 0 --diverse --final_topk 1000 \
+  --num_workers 6 --verbose --batch 1000
+  ```
+
+  ## 6DHB re-docking, dual-target integration and sort
+```bash
+python dual_target_screen.py \
+  --docking_dir ./logs/pdl1_6dhb/docking \
+  --target1_name PD-L1 --target2_name 6DHB \
+  --target2_protein ./targets/6dhb.pdb \
+  --target2_ref_ligand ./targets/ligand_6dhb.pdb \
+  --out ./logs/dual_target_hits_pdl1_6dhb.csv \
+  --pre_topk 0 --diverse --final_topk 1000 \
+  --num_workers 6 --verbose --batch 1000
+  ```

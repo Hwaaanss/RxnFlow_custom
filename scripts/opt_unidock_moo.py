@@ -74,7 +74,7 @@ def run(args):
     config.replay.use = True
     config.replay.capacity = 64 * 200
     config.replay.warmup = 64 * 20
-    config.replay.num_from_replay = 256 - 64  # batch size = 256
+    config.replay.num_from_replay = 256 - 64  # batch size = 512
 
     if args.debug:
         config.overwrite_existing_exp = True

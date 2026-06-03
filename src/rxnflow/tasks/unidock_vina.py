@@ -28,7 +28,7 @@ class VinaTask(BaseTask):
             cfg.task.docking.ref_ligand_path,
             cfg.task.docking.size,
             search_mode="fast",  # fast, balance, detail
-            num_workers=4,
+            num_workers=6,
         )
 
         self.topn_vina: OrderedDict[str, float] = OrderedDict()

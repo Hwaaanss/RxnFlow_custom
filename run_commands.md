@@ -84,7 +84,7 @@ ls ./logs/pdl1_6vqn/
 
 ## TGF-BR1 re-docking, dual-target integration and sort
 ```bash
-python dual_target_screen.py \
+python ./scripts/dual_target_screen.py \
   --docking_dir ./logs/pdl1_6vqn/docking \
   --target1_name PD-L1 --target2_name TGF-bR1 \
   --target2_protein ./targets/1vjy.pdb \
@@ -96,7 +96,7 @@ python dual_target_screen.py \
   
 ## 6TVG re-docking, dual-target integration and sort
 ```bash
-python dual_target_screen.py \
+python ./scripts/dual_target_screen.py \
   --docking_dir ./logs/pdl1_6vqn/docking \
   --target1_name PD-L1 --target2_name 6TVG \
   --target2_protein ./targets/6tvg.pdb \
@@ -108,8 +108,8 @@ python dual_target_screen.py \
 
   ## 6DHB re-docking, dual-target integration and sort
 ```bash
-python dual_target_screen.py \
-  --docking_dir ./logs/pdl1_6dhb/docking \
+python ./scripts/dual_target_screen.py \
+  --docking_dir ./logs/pdl1_6vqn/docking \
   --target1_name PD-L1 --target2_name 6DHB \
   --target2_protein ./targets/6dhb.pdb \
   --target2_ref_ligand ./targets/ligand_6dhb.pdb \

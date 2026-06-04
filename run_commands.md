@@ -89,7 +89,7 @@ python ./scripts/dual_target_screen.py \
   --target1_name PD-L1 --target2_name TGF-bR1 \
   --target2_protein ./targets/1vjy.pdb \
   --target2_ref_ligand ./targets/ligand_1vjy.pdb \
-  --out ./logs/dual_target_hits_pdl1_tgfbr1.csv \
+  --out ./logs/dual_target_hits_6vqn_1vjy.csv \
   --pre_topk 0 --diverse --final_topk 1000 \
   --num_workers 6 --verbose --batch 1000
   ```
@@ -101,7 +101,7 @@ python ./scripts/dual_target_screen.py \
   --target1_name PD-L1 --target2_name 6TVG \
   --target2_protein ./targets/6tvg.pdb \
   --target2_ref_ligand ./targets/ligand_6tvg.pdb \
-  --out ./logs/dual_target_hits_pdl1_6tvg.csv \
+  --out ./logs/dual_target_hits_6vqn_6tvg.csv \
   --pre_topk 0 --diverse --final_topk 1000 \
   --num_workers 6 --verbose --batch 1000
   ```
@@ -113,7 +113,7 @@ python ./scripts/dual_target_screen.py \
   --target1_name PD-L1 --target2_name 6DHB \
   --target2_protein ./targets/6dhb.pdb \
   --target2_ref_ligand ./targets/ligand_6dhb.pdb \
-  --out ./logs/dual_target_hits_pdl1_6dhb.csv \
+  --out ./logs/dual_target_hits_6vqn_6dhb.csv \
   --pre_topk 0 --diverse --final_topk 1000 \
   --num_workers 6 --verbose --batch 1000
   ```
